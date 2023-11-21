@@ -1,0 +1,2100 @@
+{
+	"info": {
+		"_postman_id": "b507d8c5-8e39-4c75-a2c8-63d0d7264503",
+		"name": "Patient And User collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27994517",
+		"_collection_link": "https://gold-capsule-604611.postman.co/workspace/TEAM11-ApiSpark-Dietician-API-H~7221bf9f-25e9-463a-bc13-3c922b720213/collection/27994517-b507d8c5-8e39-4c75-a2c8-63d0d7264503?action=share&source=collection_link&creator=27994517"
+	},
+	"item": [
+		{
+			"name": "all patients",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"\r",
+							"});\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {}\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating newpatient positive",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"// Extract patientId from the response\r",
+							"const patientId = response.patientId;\r",
+							"\r",
+							"// Store patientId as a global variable\r",
+							"pm.globals.set(\"patientId\", patientId);\r",
+							"\r",
+							"// Log the patientId for verification\r",
+							"console.log(\"Patient ID stored as global variable:\", patientId);\r",
+							"pm.environment.set(\"file\",\"C:\\Users\\jithu\\Downloads\\Diabetic.pdf\")\r",
+							"\r",
+							"var expectedSchema=\r",
+							"{\r",
+							" // \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"Allergy\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"ContactNumber\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"DateOfBirth\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"DieticianId\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"Email\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"FileMorbidity\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"additionalProp1\": {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"          \r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \r",
+							"          ]\r",
+							"        },\r",
+							"        \"additionalProp2\": {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"            \r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \"additionalProp1\",\r",
+							"            \"additionalProp2\",\r",
+							"            \"additionalProp3\"\r",
+							"          ]\r",
+							"        },\r",
+							"        \"additionalProp3\": {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"            \r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \r",
+							"          ]\r",
+							"        }\r",
+							"      \r",
+							"     \r",
+							"    },\r",
+							"    \"FileMorbidityCondition\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"       \r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \r",
+							"      ]\r",
+							"    },\r",
+							"    \"FirstName\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"FoodCategory\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"LastName\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"patientId\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"Allergy\",\r",
+							"    \"ContactNumber\",\r",
+							"    \"DateOfBirth\",\r",
+							"    \"DieticianId\",\r",
+							"    \"Email\",\r",
+							"    \"FileMorbidity\",\r",
+							"    \"FileMorbidityCondition\",\r",
+							"    \"FirstName\",\r",
+							"    \"FoodCategory\",\r",
+							"    \"LastName\",\r",
+							"    \"patientId\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{Email}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCategory}}\",\n    \"DateOfBirth\": \"{{DateOfBirth}}\"\n\t\n}\n",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/jithu/Desktop/postman/Diabetic.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient?patientInfo=",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient"
+					],
+					"query": [
+						{
+							"key": "patientInfo",
+							"value": ""
+						},
+						{
+							"key": "file",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating newpatient with existing values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var expectedSchema=\r",
+							"\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"errorCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"errorMessage\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"errorCode\",\r",
+							"    \"errorMessage\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/jithu/Downloads/HyperThyroid_Report_final.pdf"
+						},
+						{
+							"key": "patientInfo",
+							"value": "{     \"FirstName\": \"{{FirstName}}\",     \"LastName\": \"{{LastName}}\",      \"ContactNumber\": \"{{ContactNumber}}\",       \"Email\": \"{{Email}}\",       \"Allergy\": \"{{Allergy}}\",        \"FoodCategory\": \"{{FoodCategory}}\",         \"DateOfBirth\": \"{{DateOfBirth}}\"        }",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient?patientInfo",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient"
+					],
+					"query": [
+						{
+							"key": "patientInfo",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating newpatient invalid data",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"file\",\"C:\\Users\\jithu\\Downloads\\Diabetic.pdf\")\r",
+							"\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"errorCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"errorMessage\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"errorCode\",\r",
+							"    \"errorMessage\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n  \"FirstName\": \"{{FirstName}}\",\n  \"LastName\": \"{{LastName}}\",\n   \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{Email}}\",\n    \"Allergy\": \"{{Allergy}}\",\n     \"FoodCategory\": \"{{FoodCatagory}}\",\n    \"DateOfBirth\": \"{{DateOfBirth}}\"\n\t\n}\n",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/jithu/Desktop/postman/Diabetic.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient?patientInfo=",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient"
+					],
+					"query": [
+						{
+							"key": "patientInfo",
+							"value": ""
+						},
+						{
+							"key": "file",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating newpatient with missing mandatory field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"errorCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"errorMessage\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"errorCode\",\r",
+							"    \"errorMessage\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/jithu/Downloads/HyperThyroid_Report_final.pdf"
+						},
+						{
+							"key": "patientInfo",
+							"value": "{     \"FirstName\": \"{{FirstName}}\",     \"LastName\": \"{{LastName}}\",      \"ContactNumber\": \"{{ContactNumber}}\",       \"Email\": \"{{Email}}\",       \"Allergy\": \"{{Allergy}}\",        \"FoodCategory\": \"{{FoodCategory}}\",         \"DateOfBirth\": \" \"        }",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient?patientInfo",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient"
+					],
+					"query": [
+						{
+							"key": "patientInfo",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient by UserId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Validate First Name is updated\", function () {\r",
+							"//    console.log(response.FirstName);\r",
+							"   response.FirstName == \"John\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Last Name is updated\", function () {\r",
+							"    // console.log(response.LastName);\r",
+							"    response.LastName == \"Smith\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Contact Number is updated\", function () {\r",
+							"//    console.log(response.ContactNumber);\r",
+							"    response.ContactNumber == \"7861230700\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Email is updated\", function () {\r",
+							"    // console.log(response.Email);\r",
+							"    response.Email == \"johnsmith2077@gmail.com\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Allergy is updated\", function () {\r",
+							"    // console.log(response.Allergy);\r",
+							"    response.Allergy == \"Milk\";\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n    \"FirstName\": \"{{FirstNameUpdate}}\",\n    \"LastName\": \"{{LastNameUpdate}}\",\n    \"ContactNumber\": \"{{ContactNumber}}\",\n    \"Email\": \"{{Email}}\",\n    \"Allergy\": \"{{AllergyUpdate}}\",\n    \"FoodCategory\": \"{{FoodCategory}}\",\n    \"DateOfBirth\": \"{{DateOfBirth}}\"\n}",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/jithu/Downloads/Diabetic.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient by UserId - negative_invalid_auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is Unauthorized\", function () {\r",
+							"    pm.response.to.have.status(\"Unauthorized\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n    \"FirstName\": \"{{FirstNameUpdate}}\",\n    \"LastName\": \"{{LastNameUpdate}}\",\n    \"ContactNumber\": \"{{ContactNumberUpdate}}\",\n    \"Email\": \"{{EmailUpdate}}\",\n    \"Allergy\": \"{{AllergyUpdate}}\",\n    \"FoodCategory\": \"{{FoodCategoryUpdate}}\",\n    \"DateOfBirth\": \"{{DateOfBirthUpdate}}\"\n}",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/jithu/Downloads/Diabetic.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient by UserId - negative_NoDOB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is Bad Request\", function () {\r",
+							"    pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code message is Bad Request\", function () {\r",
+							"    pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"var response = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Validate errorCode is displayed correctly\", function () {\r",
+							"    response.errorCode == \"INVALID_REQ_DATA\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate errorMessage is displayed correctly\", function () {\r",
+							"    response.errorMessage == \"Date of Birth is Mandatory!\\n \";\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n    \"FirstName\": \"{{FirstNameUpdate}}\",\n    \"LastName\": \"{{LastNameUpdate}}\",\n    \"ContactNumber\": \"{{ContactNumberUpdate}}\",\n    \"Email\": \"{{EmailUpdate}}\",\n    \"Allergy\": \"{{AllergyUpdate}}\",\n    \"FoodCategory\": \"{{FoodCategoryUpdate}}\"\n}",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "GQ6Sxggs4/Diabetic and Hemogram Test_Thyrocare lab.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient by UserId - negative_NoContactNumber",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n    \"FirstName\": \"{{FirstNameUpdate}}\",\n    \"LastName\": \"{{LastNameUpdate}}\",\"ContactNumber\": \" \",\n    \"Email\": \"{{EmailUpdate}}\",\n    \"Allergy\": \"{{AllergyUpdate}}\",\n    \"FoodCategory\": \"{{FoodCategoryUpdate}}\",\n    \"DateOfBirth\": \"{{DateOfBirthUpdate}}\"\n}",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "GQ6Sxggs4/Diabetic and Hemogram Test_Thyrocare lab.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportDetailsByPatientID_positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"//pm.test(\"Return value content type is json\", function () \r",
+							"    //pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"// Parse the response JSON\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"// Extract fileId from the response\r",
+							"const fileId = response.fileId;\r",
+							"\r",
+							"// Store fileId as a global variable\r",
+							"pm.globals.set(\"fileId\", fileId);\r",
+							"\r",
+							"// Log the fileId for verification\r",
+							"console.log(\"File ID stored as global variable:\", fileId);\r",
+							"\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"body\": {\r",
+							"      \"type\": \"object\"\r",
+							"    },\r",
+							"    \"statusCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"statusCodeValue\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"body\",\r",
+							"    \"statusCode\",\r",
+							"    \"statusCodeValue\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbnVzaGFyZWRkeS41OUBnbWFpbC5jb20iLCJpYXQiOjE3MDAyNjQ4MDEsImV4cCI6MTcwMDI5MzYwMX0.moLgnmVnDjh9raIbh5Ctl4ZgeJTxZbcIYZTTlCn6WZX6g7WyBVRjhL0K2ni23M8HQG0vAApHn6YW6spRFaz20g",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{Baseurl}}/patient/testReports/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"testReports",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportByFileID_positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/testReports/viewFile/{{fileId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"testReports",
+						"viewFile",
+						"{{fileId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Login_NewUser_Positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Tc1-Validate status code\r",
+							"pm.test(\"Status code should be 200 ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(pm.response.status).to.eql('OK');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"//Tc2-Validating response schema\r",
+							"//Expected schema\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"token\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"type\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"userId\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"loginUserEmail\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"roles\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": [\r",
+							"        {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"token\",\r",
+							"    \"type\",\r",
+							"    \"userId\",\r",
+							"    \"loginUserEmail\",\r",
+							"    \"roles\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							"\r",
+							"//Tc3- Validating values in response\r",
+							"const responseJSON=pm.response.json();\r",
+							"pm.test(\"Validating response values\",()=>{\r",
+							"   pm.expect(responseJSON.type).to.eql(\"Bearer \");\r",
+							"   // pm.expect(responseJSON.userId).to.eql(822);\r",
+							"     pm.expect(responseJSON.loginUserEmail).to.eql(\"pallachaubey752@gmail.com\");\r",
+							"      pm.expect(responseJSON.roles[0]).to.eql('ROLE_PATIENT')\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"{{password}}\",\r\n\"userLoginEmail\": \"{{Email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/login",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Login_ValidPW_InvalidEmailNegative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code should be 401 \", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"    pm.expect(pm.response.status).to.eql('Unauthorized');\r",
+							"});\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"timestamp\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"error\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"path\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"timestamp\",\r",
+							"    \"status\",\r",
+							"    \"error\",\r",
+							"    \"path\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							"\r",
+							"//Tc3- Validating values in response\r",
+							"const responseJSON=pm.response.json();\r",
+							"pm.test(\"Validating response values\",()=>{\r",
+							"   pm.expect(responseJSON.status).to.eql(401);\r",
+							"    pm.expect(responseJSON.error).to.eql(\"Unauthorized\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"{{password}}\",\r\n\"userLoginEmail\": \"{{invalidEmail}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/login",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Login_InValidPW_validEmailNegative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Tc1-Validate status code\r",
+							"pm.test(\"Status code should be 401 \", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"    pm.expect(pm.response.status).to.eql('Unauthorized');\r",
+							"});\r",
+							"\r",
+							"//Tc2-Validating response schema\r",
+							"//Expected schema\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"timestamp\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"error\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"path\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"timestamp\",\r",
+							"    \"status\",\r",
+							"    \"error\",\r",
+							"    \"path\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							"\r",
+							"//Tc3- Validating values in response\r",
+							"const responseJSON=pm.response.json();\r",
+							"pm.test(\"Validating response values\",()=>{\r",
+							"   pm.expect(responseJSON.status).to.eql(401);\r",
+							"    pm.expect(responseJSON.error).to.eql(\"Unauthorized\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"{{invalidPW}}\",\r\n\"userLoginEmail\": \"{{userLoginEmail}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/login",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Login_MissingField_Negative Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Tc1-Validate status code\r",
+							"pm.test(\"Status code should be 401 \", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"    pm.expect(pm.response.status).to.eql('Unauthorized');\r",
+							"});\r",
+							"\r",
+							"//Tc2-Validating response schema\r",
+							"//Expected schema\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"timestamp\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"error\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"path\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"timestamp\",\r",
+							"    \"status\",\r",
+							"    \"error\",\r",
+							"    \"path\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							"\r",
+							"//Tc3- Validating values in response\r",
+							"const responseJSON=pm.response.json();\r",
+							"pm.test(\"Validating response values\",()=>{\r",
+							"   pm.expect(responseJSON.status).to.eql(401);\r",
+							"    pm.expect(responseJSON.error).to.eql(\"Unauthorized\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"\",\r\n\"userLoginEmail\": \"{{Email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/login",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Login_InvalidField_Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Tc1-Validate status code\r",
+							"pm.test(\"Status code should be 401 \", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"    pm.expect(pm.response.status).to.eql('Unauthorized');\r",
+							"});\r",
+							"\r",
+							"//Tc2-Validating response schema\r",
+							"//Expected schema\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"timestamp\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"error\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"path\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"timestamp\",\r",
+							"    \"status\",\r",
+							"    \"error\",\r",
+							"    \"path\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							"\r",
+							"//Tc3- Validating values in response\r",
+							"const responseJSON=pm.response.json();\r",
+							"pm.test(\"Validating response values\",()=>{\r",
+							"   pm.expect(responseJSON.status).to.eql(401);\r",
+							"    pm.expect(responseJSON.error).to.eql(\"Unauthorized\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"{{password}}\",\r\n\"userLoginEmail\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/login",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DieticianUser_Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/logoutdietician",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"logoutdietician"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Patient by UserId - negative_InvalidAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is Unauthorized\", function () {\r",
+							"    pm.response.to.have.status(\"Unauthorized\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Patient by UserId - negative_NoMandatoryField",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is Method Not Allowed\", function () {\r",
+							"    pm.response.to.have.status(\"Method Not Allowed\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Patient by UserId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code message is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"/*var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"body\": {\r",
+							"      \"type\": \"object\"\r",
+							"    },\r",
+							"    \"statusCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"statusCodeValue\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"body\",\r",
+							"    \"statusCode\",\r",
+							"    \"statusCodeValue\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})*/\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Patient by invalid UserId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"errorCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"errorMessage\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"errorCode\", \"errorMessage\"]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient by invalidUserId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"File not found\", function () {\r",
+							"    pm.response.to.have.status(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Validate First Name is updated\", function () {\r",
+							"//    console.log(response.FirstName);\r",
+							"   response.FirstName == \"John\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Last Name is updated\", function () {\r",
+							"    // console.log(response.LastName);\r",
+							"    response.LastName == \"Smith\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Contact Number is updated\", function () {\r",
+							"//    console.log(response.ContactNumber);\r",
+							"    response.ContactNumber == \"7861230700\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Email is updated\", function () {\r",
+							"    // console.log(response.Email);\r",
+							"    response.Email == \"johnsmith2077@gmail.com\";\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Allergy is updated\", function () {\r",
+							"    // console.log(response.Allergy);\r",
+							"    response.Allergy == \"Milk\";\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patientInfo",
+							"value": "{\n    \"FirstName\": \"{{FirstNameUpdate}}\",\n    \"LastName\": \"{{LastNameUpdate}}\",\n    \"ContactNumber\": \"{{ContactNumberUpdate}}\",\n    \"Email\": \"{{EmailUpdate}}\",\n    \"Allergy\": \"{{AllergyUpdate}}\",\n    \"FoodCategory\": \"{{FoodCategoryUpdate}}\",\n    \"DateOfBirth\": \"{{DateOfBirthUpdate}}\"\n}",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/jithu/Downloads/Diabetic.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/patient/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportDetailsByinvalidPatientID_negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Not Found\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Return value content type is json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"errorCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"errorMessage\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"errorCode\",\r",
+							"    \"errorMessage\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/testReports/{{patientId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"testReports",
+						"{{patientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportByFileID_Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"var expectedSchema=\r",
+							"{\r",
+							"  //\"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"errorCode\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"errorMessage\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"errorCode\",\r",
+							"    \"errorMessage\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Schema Validation\",()=>{\r",
+							"    pm.response.to.have.jsonSchema(expectedSchema);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/patient/testReports/viewFile/{{fileId}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"patient",
+						"testReports",
+						"viewFile",
+						"{{fileId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{BearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"/*pm.sendRequest({",
+					"    url: pm.globals.get(\"Baseurl\") + \"/auth/v1/token\",",
+					"    method: 'POST',",
+					"    headers: {",
+					"        \"Accept\": 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"    },",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            { key: 'username', value: pm.globals.get(\"userLoginEmail\") },",
+					"            { key: 'password', value: pm.globals.get(\"password\") }",
+					"        ]",
+					"    }",
+					"}, (err, res) => {",
+					"    // Set BEARERTOKEN",
+					"    pm.globals.set(\"BearerToken\", res.json().access_token)",
+					"    // You can also access other properties if needed, like userId, roles, etc.",
+					"    // pm.globals.set(\"UserId\", res.json().userId);",
+					"    // pm.globals.set(\"Roles\", res.json().roles);",
+					"});*/",
+					"/*const tokenUrl = 'https://dietician-dev-41d9a344a720.herokuapp.com/dietician/login';",
+					"",
+					"const userLoginEmail = 'neethu.perunthody@gmail.com';",
+					"const password = 'Sky23';",
+					"",
+					"const getTokenRequest = {",
+					"  method: 'POST',",
+					"  url: tokenUrl,",
+					"  body: {",
+					"      mode: 'formdata',",
+					"      formdata: [",
+					"          { key: 'grant_type', value: 'client_credentials' },",
+					"          { key: 'userLoginEmail', value: userLoginEmail },",
+					"          { key: 'password', value: password }",
+					"      ]",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(getTokenRequest, (err, response) => {",
+					"  const jsonResponse = response.json();",
+					"  const newAccessToken = jsonResponse.access_token;",
+					"",
+					"  pm.variables.set('access_token', newAccessToken);",
+					"});*/",
+					"/*pm.sendRequest({",
+					"    url: \"https://dietician-dev-41d9a344a720.herokuapp.com/dietician/login\",",
+					"    method: 'POST',",
+					"    headers: {",
+					"        \"Accept\": 'application/json',",
+					"        'Content-Type': 'application/json'",
+					"    },",
+					"    body: {",
+					"        urlencoded: [",
+					"            { key: 'userLoginEmail', value: 'neethu.perunthody@gmail.com' },",
+					"            { key: 'password', value: 'Sky23' }",
+					"        ]",
+					"    }",
+					"}, (err, res) => {",
+					"        pm.globals.set(\"BearerToken\", res.json().token);",
+					"});",
+					"*/",
+					"pm.globals.set(\"BearerToken\", \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuZWV0aHUucGVydW50aG9keUBnbWFpbC5jb20iLCJpYXQiOjE3MDA1MDE0MjMsImV4cCI6MTcwMDUzMDIyM30.RUaqnPb33g35eLmDezAqLDpt2799kC8C-ImmuMgIuV2hzwsAYcFXiCLbqm6PLhFcubM2EXuVDQledEs4cMXVZQ\");",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GlobalToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
